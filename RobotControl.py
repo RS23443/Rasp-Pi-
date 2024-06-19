@@ -110,10 +110,9 @@ def left_color_checker():
 # what the robot does as specified values, for the last line, have to make it absed on which color sensor is reading that
 
 def straight_line_following():
-   left_co = left_color_checker()
-   right_co = right_color_checker()
-   left_co() # might not need dependeding on if teh variabel run regardless when entering the chekcing system, but can add a loop to continously run the pervious functions
-   right_co()
+   left_co = str(left_color_checker())
+   right_co = str(right_color_checker())
+  
    if left_co == right_co and left_co == blue:
       drivetrain.forward()
    elif left_co == right_co and left_co == red:
