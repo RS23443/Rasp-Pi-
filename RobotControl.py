@@ -35,7 +35,6 @@ drivetrain = gpiozero.Robot(left = lm and bl and fl, right= fr and mr and br)
 
 # on function - just test code inside for now
 def on(): 
-  if button_on is pressed:
     drivetrain.forward()
     sleep(5)
     drivetrain.right()
@@ -47,7 +46,6 @@ def on():
     
 # off function, turns robo off
 def off():
-  if button_off is pressed:
     drivetrain.stop()
 
 # def endprogram():
@@ -188,6 +186,8 @@ f_dis_sensor = gpiozero.DistanceSensor(#Gpiozero number, second number, max_dist
 l_dis_sensor = gpiozero.DistanceSensor(#Gpiozero number, second number, max_distance = 3, threshold_distance = 0.2) left distance sensor
 r_dis_sensor = gpiozero.DistanceSensor(#Gpiozero number, second number, max_distance = 3, threshold_distance = 0.2) right distance sensor
 b_dis_sensor = gpiozero.DistanceSensor(#Gpiozero number, second number, max_distance = 3, threshold_distance = 0.2) back distance sensor
+max_dis = 3
+min_dis = 0.2
 
 def distance_checker(): 
   while f_dis_sensor.in_range:
@@ -211,5 +211,14 @@ def move_until_w/o_color:
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-  
+  # attempt to combine the code
+def main_fuction():
+       if button_on.is_pressed:
+         on()
+         while drivetrain.forward:
+           left_color_checker()
+
+
+      
+       
   
