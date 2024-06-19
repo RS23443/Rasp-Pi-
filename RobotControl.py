@@ -31,6 +31,8 @@ bl = gpiozero.Motor(9,25)
 
 drivetrain = gpiozero.Robot(left = lm and bl and fl, right= fr and mr and br)
 # this declares the robo and its motor
+moving = drivetrain.forward or drivetrain.backward or drivetrain.left or drivetrain.right
+#var to make movement one var
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # on function - just test code inside for now
@@ -188,35 +190,64 @@ r_dis_sensor = gpiozero.DistanceSensor(#Gpiozero number, second number, max_dist
 b_dis_sensor = gpiozero.DistanceSensor(#Gpiozero number, second number, max_distance = 3, threshold_distance = 0.2) back distance sensor
 max_dis = 3
 min_dis = 0.2
+       
+def dist_checker():
+    while f_dis_sensor.in_range:
+        if l_dis_sesnor.in_range:
+          drivertrain.right
+        elif r_dis_sensor.in_range:
+          drivertrain.left
+        elif l_dis_sensor.in_range and r_dis_sensor.in_range:
+          while l_dis_sensor.in_range and r_dis_sensor.in_range:
+            drivetrain.backward
+            b_dis_sensor.when_in_range = drivertain.stop 
+        elif:
+          drivetrain.stop
 
-def distance_checker(): 
-  while f_dis_sensor.in_range:
-    if l_dis_sesnor.in_range:
-      drivertrain.right
-    elif r_dis_sensor.in_range
-      drivertrain.left
-    elif l_dis_sensor.in_range && r_dis_sensor.in_range:
-      while l_dis_sensor.in_range && r_dis_sensor.in_range:
-        drivetrain.backward
-        b_dis_sensor.when_in_range = drivertain.stop 
-    elif
-      drivetrain.stop
-  
-def move_until_w/o_color:
-  while f_dis_sensor.out_of_range:  
-    drivetrain.forward
+       
+def move_until_wo_color():
+    while f_dis_sensor.out_of_range:  
+        drivetrain.forward
   
   #dis_sensor.when_in_range = drivetrain.stop
   #dis_sensor.when_out_of_range = drivetrain.forward
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# color plus distance checker
+       
+def cdc():
+   if move_checker == True:
+       left_co = int(left_color_checker())
+       right_co = int(right_color_checker())
+  
+       if left_co == right_co and left_co == 2:
+          drivetrain.forward()
+          sleep(1)
+          dist_checker() 
+       
+       elif left_co == right_co and left_co == 1:
+          drivetrain.stop()
+           sleep(5)
+       elif left_co != right_co and (left_co == n/a or right_co == n/a):   
+         if left_co == 0:
+           drivetrain.right()
+           sleep(5)
+         elif right_co == 0:
+           drivetrain.left()
+           sleep(5)
+         elif left_co= 0 and right_co == 0
+           drivetrain.stop()
+           
+           
 
-
-  # attempt to combine the code
-def main_fuction():
-       if button_on.is_pressed:
-         on()
-         while drivetrain.forward:
-           left_color_checker()
+def move_checker():
+    if moving:
+           return (True) 
+    else
+       return (False)
+#checks if any of the robots motors are running and returns true or false                   
+       
+             
+      
 
 
       
