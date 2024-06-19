@@ -101,17 +101,17 @@ def right_color_checker():
 def left_color_checker():
   loop()
   if red > 12000 and blue < 7000 and green <7000:
-    return("red")
+    return("1")
   elif blue >12000 and green < 7000 and red < 7000:
-    return("blue")
+    return("2")
   elif blue >10000 and green > 10000 and red > 10000:
-    return("n/a")
+    return("0")
 
 # what the robot does as specified values, for the last line, have to make it absed on which color sensor is reading that
 
 def straight_line_following():
-   left_co = str(left_color_checker())
-   right_co = str(right_color_checker())
+   left_co = int(left_color_checker())
+   right_co = int(right_color_checker())
   
    if left_co == right_co and left_co == blue:
       drivetrain.forward()
