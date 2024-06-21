@@ -1,6 +1,10 @@
 import gpiozero
 from time import sleep, time
 import RPi.GPIO as GPI1 # for color sensor program
+import busio # for lidar sensor
+import board # for lidar sensor
+import adafruit_lidarlite # for lidar sensor
+import adafruit_ht16k33.segments # for lidar sensor
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -31,7 +35,7 @@ bl = gpiozero.Motor(9,25)
 
 drivetrain = gpiozero.Robot(left = lm and bl and fl, right= fr and mr and br)
 # this declares the robo and its motor
-moving = drivetrain.forward or drivetrain.backward or drivetrain.left or drivetrain.right
+moving = bool(drivetrain.forward or drivetrain.backward or drivetrain.left or drivetrain.right)
 #var to make movement one var
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -192,22 +196,21 @@ max_dis = 3
 min_dis = 0.2
        
 def dist_checker():
-    while f_dis_sensor.in_range:
-        if l_dis_sesnor.in_range:
-          drivertrain.right
-        elif r_dis_sensor.in_range:
-          drivertrain.left
-        elif l_dis_sensor.in_range and r_dis_sensor.in_range:
-          while l_dis_sensor.in_range and r_dis_sensor.in_range:
-            drivetrain.backward
-            b_dis_sensor.when_in_range = drivertain.stop 
-        elif:
-          drivetrain.stop
-
-       
-def move_until_wo_color():
-    while f_dis_sensor.out_of_range:  
-        drivetrain.forward
+    if f_dis_sensor.out_of_range:
+           while True:
+               drivetrain.forward
+    elif f_dis_sensor.in_range:     
+        while True:
+            if l_dis_sesnor.in_range:
+              drivertrain.right
+            elif r_dis_sensor.in_range:
+              drivertrain.left
+            elif l_dis_sensor.in_range and r_dis_sensor.in_range:
+              while l_dis_sensor.in_range and r_dis_sensor.in_range:
+                drivetrain.backward
+                b_dis_sensor.when_in_range = drivertain.stop 
+            elif:
+              drivetrain.forward #unitl two sesnors get reading
   
   #dis_sensor.when_in_range = drivetrain.stop
   #dis_sensor.when_out_of_range = drivetrain.forward
@@ -215,7 +218,7 @@ def move_until_wo_color():
 # color plus distance checker
        
 def cdc():
-   if move_checker == True:
+   if moving == True:
        left_co = int(left_color_checker())
        right_co = int(right_color_checker())
   
@@ -236,18 +239,34 @@ def cdc():
            sleep(5)
          elif left_co= 0 and right_co == 0
            drivetrain.stop()
-           
-           
-
-def move_checker():
-    if moving:
-           return (True) 
-    else
-       return (False)
+               
+#def move_checker():
+    #if moving:
+      #  return (True) 
+    #else
+     #  return (False)
 #checks if any of the robots motors are running and returns true or false                   
        
-             
-      
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Lidar Sensor code
+i2c = busio.I2C(board.SCL, board.SDA)
+
+lid_sensor = adafruit_lidarlite.LIDARLite(i2c)
+display = adafruit_ht16k33.segments.Seg7x4(i2c)
+min_lid_dis = 5
+er = bool(RuntimeError)
+
+def check_angles():        
+    while True:
+        try:
+            drivetrain.forward
+            if min_lid_dis >= lid_sesnor.distance:
+                drivetrain.stop
+            while 
+        if er == True:
+               drivetrain.stop
+# this function will check is the lidar on the corner is getting too close to the edge -- not necessary with distance sesnors as the jobs clash and could ruin the program
+# safest bet is distance, camera, and color
 
 
       
