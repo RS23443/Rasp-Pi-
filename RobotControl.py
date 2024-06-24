@@ -262,9 +262,10 @@ def check_angles():
             drivetrain.forward
             if min_lid_dis >= lid_sesnor.distance:
                 drivetrain.stop
-            while 
-        if er == True:
+            if er == True:
                drivetrain.stop
+           elif
+               drivertain.forward
 # this function will check is the lidar on the corner is getting too close to the edge -- not necessary with distance sesnors as the jobs clash and could ruin the program
 # safest bet is distance, camera, and color
 
